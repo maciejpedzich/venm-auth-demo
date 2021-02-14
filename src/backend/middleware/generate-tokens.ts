@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { sign } from 'jsonwebtoken';
 
 import RequestWithUser from '../interfaces/request-with-user';
-import User, { UserModel } from '../models/user';
+import { UserModel } from '../models/user';
 
 export default async function generateTokensMiddleware(
   req: RequestWithUser,
