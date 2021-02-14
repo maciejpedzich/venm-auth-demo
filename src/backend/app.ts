@@ -18,8 +18,17 @@ const app = express();
       useUnifiedTopology: true
     });
 
-    app.use(cors());
+    app.use(
+      cors({
+        origin: process.env.ORIGIN_URL as string,
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        exposedHeaders: ['Authorization']
+      })
+    );
     app.use(cookieParser());
+    app.use(express.json());
 
     app.use('/api/auth', new AuthController().router);
     app.use(errorMiddleware);
