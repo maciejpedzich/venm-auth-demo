@@ -5,7 +5,6 @@ import UserPayload from '@/interfaces/payloads/user';
 import RootState from '@/interfaces/states/root';
 import AuthModuleState from '@/interfaces/states/auth-module';
 import AuthFormData from '@/interfaces/models/auth-form-data';
-import determineErrorMessage from '@/utils/error-message';
 
 interface SaveCredentialsData {
   accessToken: string;
@@ -44,9 +43,7 @@ const actions = {
       commit('SAVE_CREDENTIALS', { accessToken, currentUser });
       await dispatch('silentRefresh', FIFTEEN_MINUTES);
     } catch (error) {
-      const message = determineErrorMessage(error);
-
-      throw new Error(message);
+      throw error;
     }
   },
   async logIn(
@@ -61,9 +58,7 @@ const actions = {
       commit('SAVE_CREDENTIALS', { accessToken, currentUser });
       await dispatch('silentRefresh', FIFTEEN_MINUTES);
     } catch (error) {
-      const message = determineErrorMessage(error);
-
-      throw new Error(message);
+      throw error;
     }
   },
   silentRefresh(
@@ -82,9 +77,7 @@ const actions = {
             dispatch('silentRefresh', FIFTEEN_MINUTES);
           })
           .catch((error) => {
-            const message = determineErrorMessage(error);
-
-            reject(new Error(message));
+            reject(error);
           });
       }, timeout);
 
