@@ -7,6 +7,8 @@ import InvalidCredentialsError from '../errors/invalid-credentials';
 
 import authMiddleware from '../middleware/auth';
 import generateTokensMiddleware from '../middleware/generate-tokens';
+import UsernameTakenError from '../errors/username-taken';
+import EmailRegisteredError from '../errors/email-registered';
 
 export default class AuthController {
   public router = Router();
@@ -25,6 +27,15 @@ export default class AuthController {
     next: NextFunction
   ) {
     try {
+      const usernameTaken = await User.findOne({ username: req.body.username });
+      const emailTaken = await User.findOne({ email: req.body.email });
+
+      if (usernameTaken) {
+        throw new UsernameTakenError();
+      } else if (emailTaken) {
+        throw new EmailRegisteredError();
+      }
+
       req.body.password = await hash(req.body.password, 10);
       req.user = await User.create(req.body);
 
