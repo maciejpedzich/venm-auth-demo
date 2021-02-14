@@ -41,7 +41,7 @@ const actions = {
       const accessToken = res.headers.authorization;
       const currentUser = res.data;
 
-      commit('saveCredentials', { accessToken, currentUser });
+      commit('SAVE_CREDENTIALS', { accessToken, currentUser });
       await dispatch('silentRefresh', FIFTEEN_MINUTES);
     } catch (error) {
       const message = determineErrorMessage(error);
@@ -78,7 +78,7 @@ const actions = {
             const accessToken = res.headers.authorization;
             const currentUser = res.data;
 
-            commit('saveCredentials', { accessToken, currentUser });
+            commit('SAVE_CREDENTIALS', { accessToken, currentUser });
             dispatch('silentRefresh', FIFTEEN_MINUTES);
           })
           .catch((error) => {
