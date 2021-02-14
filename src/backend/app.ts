@@ -15,7 +15,8 @@ const app = express();
   try {
     await connectToDatabase(process.env.DB_URL as string, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true
     });
 
     app.use(
@@ -33,7 +34,9 @@ const app = express();
     app.use('/api/auth', new AuthController().router);
     app.use(errorMiddleware);
 
-    app.listen(process.env.BACKEND_PORT);
+    app.listen(process.env.BACKEND_PORT, () =>
+      console.log(`Server restarted successfully!`)
+    );
   } catch (error) {
     console.error(error);
   }
