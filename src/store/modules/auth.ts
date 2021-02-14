@@ -41,7 +41,7 @@ const actions = {
       const currentUser = res.data;
 
       commit('SAVE_CREDENTIALS', { accessToken, currentUser });
-      await dispatch('silentRefresh', FIFTEEN_MINUTES);
+      await dispatch('startRefreshTimeout', FIFTEEN_MINUTES);
     } catch (error) {
       throw error;
     }
@@ -56,17 +56,17 @@ const actions = {
       const currentUser = res.data;
 
       commit('SAVE_CREDENTIALS', { accessToken, currentUser });
-      await dispatch('silentRefresh', FIFTEEN_MINUTES);
+      await dispatch('startRefreshTimeout', FIFTEEN_MINUTES);
     } catch (error) {
       throw error;
     }
   },
-  silentRefresh(
+  startRefreshTimeout(
     { commit, dispatch }: ActionContext<AuthModuleState, RootState>,
     timeout: number
   ) {
-    return new Promise<number>((resolve, reject) => {
-      const refreshTimeoutId = window.setTimeout(() => {
+    return new Promise((resolve, reject) => {
+      const refreshTimeoutId = setTimeout(() => {
         axios
           .post('/api/auth/refresh', {})
           .then((res) => {
@@ -74,7 +74,7 @@ const actions = {
             const currentUser = res.data;
 
             commit('SAVE_CREDENTIALS', { accessToken, currentUser });
-            dispatch('silentRefresh', FIFTEEN_MINUTES);
+            dispatch('startRefreshTimeout', FIFTEEN_MINUTES);
           })
           .catch((error) => {
             reject(error);
