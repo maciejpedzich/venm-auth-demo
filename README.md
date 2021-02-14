@@ -4,7 +4,7 @@
 
 ## About this project
 
-This is a VENM stack (basically MERN, but with Vue.js instead of React) JWT auth demom, including a silent/background refresh feature. It utilises Vue 3's Composition API alongside TypeScript and Vuex on the frontend, and as you've probably guessed by now, Node.js with Express and MongoDB (and also TypeScript) on the backend.
+This is a VENM stack (basically MERN, but with Vue.js instead of React) JWT auth demo, including a silent/background refresh feature. It utilises Vue 3's Composition API alongside TypeScript and Vuex on the frontend, and as you've probably guessed by now, Node.js with Express and MongoDB (and also TypeScript) on the backend.
 
 ## Project setup
 
