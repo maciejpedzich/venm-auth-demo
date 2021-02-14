@@ -34,12 +34,7 @@ export default class AuthController {
     }
   }
 
-  // prettier-ignore
-  private async logIn(
-    req: RequestWithUser,
-    res: Response,
-    next: NextFunction
-  ) {
+  private async logIn(req: RequestWithUser, res: Response, next: NextFunction) {
     try {
       const user = await User.findOne({ username: req.body.username });
 
