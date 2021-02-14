@@ -17,11 +17,13 @@ export default async function authMiddleware(
     const accessTokenPayload = verify(accessToken, secret) as TokenPayload;
 
     // prettier-ignore
-    req.user = (
+    const user = (
       await User.findOne({
-        id: accessTokenPayload.userId
+        _id: accessTokenPayload.userId
       })
     ) as UserModel;
+
+    req.user = user;
 
     return next();
   } catch (error) {
@@ -34,11 +36,13 @@ export default async function authMiddleware(
         ) as TokenPayload;
 
         // prettier-ignore
-        req.user = (
+        const user = (
           await User.findOne({
-            id: refreshTokenPayload.userId
+            _id: refreshTokenPayload.userId
           })
         ) as UserModel;
+
+        req.user = user;
 
         return next();
       } catch (e) {

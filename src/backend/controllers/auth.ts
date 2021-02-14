@@ -27,7 +27,9 @@ export default class AuthController {
     next: NextFunction
   ) {
     try {
-      const usernameTaken = await User.findOne({ username: req.body.username });
+      const usernameTaken = await User.findOne({
+        username: req.body.username
+      });
       const emailTaken = await User.findOne({ email: req.body.email });
 
       if (usernameTaken) {
