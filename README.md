@@ -17,7 +17,7 @@ npm install
 Create `.env` file in project's root directory. Add the following variables:
 
 ```sh
-BACKEND_PORT= # Port for Express auth server
+BACKEND_PORT= # Port of Express auth server
 DB_URL= # MongoDB Connection URL
 ORIGIN_URL= # URL of CORS origin; i.e. Vue app's URL
 JWT_SECRET= # Secret used for signing JWTs
