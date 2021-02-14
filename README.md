@@ -30,6 +30,12 @@ VUE_APP_API_URL= # Express auth server's URL
 npm run serve
 ```
 
+For backend:
+
+```
+npm run serve:backend
+```
+
 ### Compiles and minifies for production
 
 ```
