@@ -13,7 +13,7 @@ const app = express();
 
 (async () => {
   try {
-    await connectToDatabase(process.env.DB_URI as string, {
+    await connectToDatabase(process.env.DB_URL as string, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
